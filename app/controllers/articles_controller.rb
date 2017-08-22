@@ -1,5 +1,6 @@
 
 class ArticlesController < ApplicationController
+ http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
   def index
      @articles = Article.all
    end
@@ -15,6 +16,7 @@ end
 
 
   def create
+     @article = Article.find(params[:article_id])
     @article = Article.new(article_params)
 
     if @article.save
